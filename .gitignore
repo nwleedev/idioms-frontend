@@ -173,3 +173,6 @@ sketch
 
 # and uncomment the following lines
 # .pnp.*
+
+**/*.css
+**/*.css.map
