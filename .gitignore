@@ -174,5 +174,7 @@ sketch
 # and uncomment the following lines
 # .pnp.*
 
-**/*.css
-**/*.css.map
+app/components/**/*.css
+app/components/**/*.css.map
+app/pages/**/*.css
+app/pages/**/*.css.map
