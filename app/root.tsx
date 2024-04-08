@@ -45,10 +45,11 @@ export default function Root() {
       <body translate="no">
         <div id="root">
           <Outlet />
-          <Suspense>
-            {typeof window !== "undefined" && <LocationListener />}
-          </Suspense>
         </div>
+        <div id="modal"></div>
+        <Suspense>
+          {typeof window !== "undefined" && <LocationListener />}
+        </Suspense>
         <Scripts />
       </body>
     </html>
