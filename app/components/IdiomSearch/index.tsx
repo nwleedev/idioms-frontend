@@ -1,6 +1,6 @@
+import { MagnifyingGlassIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useNavigate } from "@remix-run/react";
 import { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import useGridColumns from "~/hooks/useGridColumns";
 import { GuardV3 } from "../Guard";
 
@@ -44,13 +44,13 @@ const IdiomSearch = (props: IdiomSearchProps) => {
   const hasLabel = columns !== 1;
 
   return (
-    <div className="flex gap-x-3 py-0.5 max-w-[405px] w-full h-full justify-end pl-2">
+    <div className="flex justify-end w-full pl-2 gap-x-3">
       <GuardV3 when={isInputClicked}>
         {() => {
           return (
             <>
               <div
-                className="flex w-full h-full px-2 border-2 border-gray-300 rounded gap-x-2"
+                className="flex w-full h-10 px-2 border-2 border-gray-300 rounded gap-x-2"
                 ref={(element) => {
                   inputRef.current = element;
                 }}
@@ -58,7 +58,7 @@ const IdiomSearch = (props: IdiomSearchProps) => {
                 <MagnifyingGlassIcon className="w-6" />
                 <form
                   method="get"
-                  className="flex items-center w-full h-full"
+                  className="flex items-center w-full"
                   onSubmit={(event) => {
                     event.preventDefault();
                     if (keyword.length < 2) {
@@ -85,10 +85,6 @@ const IdiomSearch = (props: IdiomSearchProps) => {
                   <XMarkIcon className="w-6" strokeWidth={1} />
                 </button>
               </div>
-              <div className="flex items-center gap-x-0.5">
-                <Cog8ToothIcon className="w-6" />
-                {hasLabel && <span className="text-sm">Setting</span>}
-              </div>
             </>
           );
         }}
@@ -107,10 +103,6 @@ const IdiomSearch = (props: IdiomSearchProps) => {
                 <MagnifyingGlassIcon className="w-6" />
                 {hasLabel && <span className="text-sm">Search</span>}
               </button>
-              <div className="flex items-center gap-x-0.5">
-                <Cog8ToothIcon className="w-6" />
-                {hasLabel && <span className="text-sm">Setting</span>}
-              </div>
             </>
           );
         }}

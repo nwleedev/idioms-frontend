@@ -1,3 +1,4 @@
+import { isNotNil } from "ramda";
 import {
   useCallback,
   useContext,
@@ -17,6 +18,11 @@ const useSpeechContext = () => {
   } = useContext(SpeechContext);
   const speechRef = useRef(null as SpeechSynthesis | null);
   const utteranceRef = useRef(null as SpeechSynthesisUtterance | null);
+  const { state: speechSettings } = useLocalStorage("app:speech", {
+    pitch: 1,
+    rate: 1,
+    volume: 1,
+  });
   const [, transition] = useTransition();
   useEffect(() => {
     if (
@@ -74,6 +80,12 @@ const useSpeechContext = () => {
 
       utteranceRef.current.text = example.content;
       utteranceRef.current.voice = voice;
+      if (isNotNil(speechSettings)) {
+        utteranceRef.current.pitch = speechSettings.pitch;
+        utteranceRef.current.rate = speechSettings.rate;
+        utteranceRef.current.volume = speechSettings.volume;
+      }
+
       speechRef.current.speak(utteranceRef.current);
       dispatch({ key: "SPEECH/IDIOM_PLAY", payload: { idiom: example } });
     },
