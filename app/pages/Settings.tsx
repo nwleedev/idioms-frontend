@@ -29,7 +29,7 @@ function Settings() {
   }, [speechSettings, storedSettings, isRendered]);
 
   return (
-    <div className="Settings w-full max-w-[820px] mx-auto h-full">
+    <div className="Settings w-full max-w-[820px] mx-auto h-full px-8">
       <NavBar />
       <main className="flex flex-col w-full h-full py-4 gap-y-2 sm:gap-y-4">
         <h1 className="text-2xl font-bold ">Application Settings</h1>
