@@ -8,7 +8,8 @@
     "build": "remix vite:build",
     "start": "PORT=8082 remix-serve ./build/server/index.js",
     "check": "tsc",
-    "sass": "sass --watch app/:app/",
+    "sass": "sass app/:app/",
+    "sass:watch": "sass --watch app/:app/",
     "sitemap": "node --loader ts-node/esm ./scripts/sitemap.ts"
   },
   "dependencies": {
