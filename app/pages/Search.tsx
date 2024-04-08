@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams } from "@remix-run/react";
 import IdiomsGrid, { css as idiomsGridCss } from "~/components/IdiomsGrid";
 import NavBar from "~/components/NavBar";
 import useGridColumns from "~/hooks/useGridColumns";
@@ -19,14 +18,10 @@ function Search() {
   const idioms = data?.pages.map((page) => (page ? page.idioms : [])).flat(1);
   const { maxWidth } = useGridColumns();
 
-  useEffect(() => {
-    document.title = `${keyword} - Use Idioms Search`;
-  }, [keyword]);
-
   return (
     <div className={["px-4 w-full mx-auto h-full", maxWidth].join(" ")}>
-      <main className="flex flex-col w-full h-full py-4 gap-y-2 sm:gap-y-4">
-        <NavBar />
+      <NavBar />
+      <main className="flex flex-col w-full h-[calc(100vh-4rem)] gap-y-2 sm:gap-y-4">
         <IdiomsGrid
           idioms={idioms}
           isFetched={isFetched}
