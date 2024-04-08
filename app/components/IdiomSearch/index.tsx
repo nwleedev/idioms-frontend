@@ -1,8 +1,4 @@
-import {
-  Cog8ToothIcon,
-  MagnifyingGlassIcon,
-  XMarkIcon,
-} from "@heroicons/react/24/outline";
+import { useNavigate } from "@remix-run/react";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useGridColumns from "~/hooks/useGridColumns";

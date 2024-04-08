@@ -1,5 +1,5 @@
+import { Link } from "@remix-run/react";
 import { CSSProperties } from "react";
-import { Link } from "react-router-dom";
 import { Idiom } from "~/types/idiom";
 import { GuardV3 } from "../Guard";
 

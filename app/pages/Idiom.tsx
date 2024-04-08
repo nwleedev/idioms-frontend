@@ -1,5 +1,5 @@
+import { Link, useNavigate } from "@remix-run/react";
 import { useEffect, useRef, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
 import useRelatedIdioms from "~/hooks/useRelatedIdioms";
 
 import { ChevronLeftIcon } from "@heroicons/react/24/outline";
@@ -28,12 +28,6 @@ const IdiomPage = (props: IdiomPageProps) => {
   useEffect(() => {
     window.scrollTo({ top: 0 });
   }, []);
-  useEffect(() => {
-    if (!idiom) {
-      document.title = "Loading Idioms...";
-    }
-    document.title = `${idiom?.idiom} - Use Idioms`;
-  }, [idiom]);
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {

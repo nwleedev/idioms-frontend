@@ -16,9 +16,11 @@ export default function handleRequest(
   responseStatusCode: number,
   responseHeaders: Headers,
   remixContext: EntryContext,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   loadContext: AppLoadContext
 ) {
+  if (import.meta.env.DEV) {
+    console.log("context", loadContext);
+  }
   return isbot(request.headers.get("user-agent") || "")
     ? handleBotRequest(
         request,

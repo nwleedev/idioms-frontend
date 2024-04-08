@@ -4,8 +4,8 @@ import {
   PaperAirplaneIcon,
   Square2StackIcon,
 } from "@heroicons/react/24/outline";
+import { Link } from "@remix-run/react";
 import { format } from "date-fns/format";
-import { Link } from "react-router-dom";
 import useModalContext from "~/hooks/useModalContext";
 import useUploadThumbnail from "~/hooks/useUploadThumbnail";
 import { Idiom } from "~/types/idiom";

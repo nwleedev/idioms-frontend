@@ -1,3 +1,4 @@
+import { Link, useLocation } from "@remix-run/react";
 import { useState } from "react";
 import useGridColumns from "~/hooks/useGridColumns";
 import IdiomSearch from "../IdiomSearch";
