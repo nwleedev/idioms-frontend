@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "VITE_DEV_PORT=8082 remix vite:dev",
-    "build": "remix vite:build",
+    "build": "npm run sass && remix vite:build",
     "start": "PORT=8082 remix-serve ./build/server/index.js",
     "check": "tsc",
     "sass": "sass app/:app/",
