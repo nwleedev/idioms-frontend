@@ -13,9 +13,16 @@ import useLocalStorage from "./useLocalStorage";
 
 const useSpeechContext = () => {
   const {
-    store: { isPlaying, hasWordClick: hasWordClickContext, idiom, voice },
+    store: { isPlaying, hasWordClick: hasWordClickContext, idiom, voices },
     dispatch,
   } = useContext(SpeechContext);
+  // const [voice, setVoice] = useState(null as SpeechSynthesisVoice | null)
+  const { state: voiceName } = useLocalStorage<"app:voice", string>(
+    "app:voice"
+  );
+  const voice = useMemo(() => {
+    return voices.find((voice) => voice.name === voiceName) ?? voices[0];
+  }, [voices, voiceName]);
   const speechRef = useRef(null as SpeechSynthesis | null);
   const utteranceRef = useRef(null as SpeechSynthesisUtterance | null);
   const { state: speechSettings } = useLocalStorage("app:speech", {
@@ -52,12 +59,12 @@ const useSpeechContext = () => {
         return;
       }
       const enUS = /\ben.US\b/gi;
-      const nextVoice = voices.find((voice) => enUS.test(voice.lang));
-      if (!nextVoice) {
+      const nextVoices = voices.filter((voice) => enUS.test(voice.lang));
+      if (!nextVoices) {
         return;
       }
       transition(() => {
-        dispatch({ key: "SPEECH/VOICE", payload: { voice: nextVoice } });
+        dispatch({ key: "SPEECH/VOICES", payload: { voices: nextVoices } });
       });
       clearTimeout(timer);
     };
@@ -89,7 +96,7 @@ const useSpeechContext = () => {
       speechRef.current.speak(utteranceRef.current);
       dispatch({ key: "SPEECH/IDIOM_PLAY", payload: { idiom: example } });
     },
-    [dispatch, voice]
+    [dispatch, voice, speechSettings]
   );
 
   const onPlayMiddle = useCallback(
@@ -175,6 +182,8 @@ const useSpeechContext = () => {
     isPlaying,
     hasWordClick,
     idiom,
+    voices,
+    voice,
     onPlay,
     onPlayMiddle,
     onPause,

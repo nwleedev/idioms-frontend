@@ -4,15 +4,15 @@ import { IdiomExample } from "~/types/idiom";
 export interface AppSpeech {
   isPlaying: boolean;
   hasWordClick: boolean;
+  voices: SpeechSynthesisVoice[];
   idiom?: IdiomExample;
-  voice?: SpeechSynthesisVoice;
 }
 
 export type SpeechAction =
   | {
-      key: "SPEECH/VOICE";
+      key: "SPEECH/VOICES";
       payload: {
-        voice: SpeechSynthesisVoice;
+        voices: SpeechSynthesisVoice[];
       };
     }
   | {
@@ -45,11 +45,11 @@ export const SpeechContext = createContext({
 const speechReducer = (state: AppSpeech, action: SpeechAction) => {
   const { key } = action;
   switch (key) {
-    case "SPEECH/VOICE": {
+    case "SPEECH/VOICES": {
       const { payload } = action;
       state = {
         ...state,
-        voice: payload.voice,
+        voices: payload.voices,
       };
       break;
     }
@@ -107,7 +107,7 @@ export const SpeechProvider = (props: PropsWithChildren) => {
     isPlaying: false,
     hasWordClick: false,
     idiom: undefined,
-    voice: undefined,
+    voices: [],
   } satisfies AppSpeech);
 
   return (
