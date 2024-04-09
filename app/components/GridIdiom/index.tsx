@@ -38,11 +38,12 @@ const GridIdiom = (props: GridIdiomProps) => {
                 }}
                 className="bg-center"
               >
-                <div className="backdrop-blur-[50px]">
+                <div className="backdrop-blur-[50px] h-full">
                   <img
                     src={`https://static.useidioms.com/${idiom.thumbnail}`}
                     alt={idiom.idiom}
                     className="max-w-[190px] w-full object-cover mx-auto h-auto"
+                    onLoad={() => {}}
                   />
                 </div>
               </div>

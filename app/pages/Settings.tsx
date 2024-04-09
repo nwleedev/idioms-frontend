@@ -3,7 +3,9 @@ import { useEffect, useState } from "react";
 import Button from "~/components/Button";
 import NavBar from "~/components/NavBar";
 import RangeInput, { css as rangeInputCss } from "~/components/RangeInput";
+import SelectInput from "~/components/SelectInput";
 import useLocalStorage from "~/hooks/useLocalStorage";
+import useSpeechContext from "~/hooks/useSpeechContext";
 import style from "./Settings.css?url";
 
 export const css = [{ rel: "stylesheet", href: style }, ...rangeInputCss];
@@ -16,9 +18,6 @@ function Settings() {
     rate: 1,
     volume: 1,
   });
-  const onSave = () => {
-    setStoredSettings(speechSettings);
-  };
   const [isRendered, setIsRendered] = useState(false);
   useEffect(() => {
     if (isRendered || isNil(storedSettings)) {
@@ -27,6 +26,21 @@ function Settings() {
     setSpeechSettings(storedSettings);
     setIsRendered(true);
   }, [speechSettings, storedSettings, isRendered]);
+  const { voices, voice } = useSpeechContext();
+  const { setState: setVoice, removeState } = useLocalStorage("app:voice");
+  const onSave = () => {
+    setStoredSettings(speechSettings);
+  };
+  const onReset = () => {
+    const initialSettings = {
+      pitch: 1,
+      rate: 1,
+      volume: 1,
+    };
+    setStoredSettings(initialSettings);
+    setSpeechSettings(initialSettings);
+    removeState();
+  };
 
   return (
     <div className="Settings w-full max-w-[820px] mx-auto h-full px-8">
@@ -75,13 +89,44 @@ function Settings() {
               }));
             }}
           />
-          <Button
-            className="max-w-[600px] justify-center"
-            onClick={() => onSave()}
+          <SelectInput
+            label="Voice"
+            disabled={voices.length === 0}
+            options={voices}
+            value={voice}
+            onChange={(nextVoice) => {
+              setVoice(nextVoice.name);
+            }}
           >
-            <span className="inline-flex">Save</span>
-          </Button>
+            {(voice) => {
+              return voice?.name;
+            }}
+          </SelectInput>
+          <div className="flex gap-x-1">
+            <Button
+              className="flex justify-center w-full py-1"
+              onClick={() => onSave()}
+            >
+              <span className="inline-flex">Save</span>
+            </Button>
+            <Button
+              className="flex justify-center w-full py-1 bg-black column200:w-40"
+              onClick={() => onReset()}
+            >
+              <span className="inline-flex">Reset</span>
+            </Button>
+          </div>
         </article>
+        <hr />
+        <section className="flex flex-col gap-y-1">
+          <h3 className="text-base font-semibold">When no voices found</h3>
+          <ul className="text-sm text-gray-600 list-disc list-inside">
+            <li>You can check translation settings in the web browser.</li>
+            <li>
+              You can check text-to-speech settings in the mobile devices.
+            </li>
+          </ul>
+        </section>
       </main>
     </div>
   );

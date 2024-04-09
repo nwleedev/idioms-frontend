@@ -49,7 +49,7 @@ export default function RangeInput(props: RangeInputProps) {
     };
   }, [max, min, value, onChange]);
   return (
-    <section className="RangeInput flex flex-col justify-between w-full max-w-[600px] gap-y-1.5">
+    <section className="RangeInput flex flex-col justify-between w-full gap-y-1.5">
       <div className="flex justify-between w-full">
         <h3 className="font-light">{label}</h3>
         <input
