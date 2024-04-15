@@ -40,7 +40,7 @@ const useUploadThumbnail = <Type extends "file" | "url">(
     if (type === "file" && args.file) {
       formData.append("thumbnail", args.file);
     } else if (type === "url" && args.url) {
-      formData.append("imageUrl", args.url);
+      formData.append("imageUrl", btoa(args.url));
     }
 
     const response = await fetch(apiUrl, {
