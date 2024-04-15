@@ -89,7 +89,7 @@ const IdiomsGrid = (props: IdiomsGridProps) => {
       {({ data: { idioms } }) => {
         return (
           <article
-            className={["flex w-full h-full", maxWidth].join(" ")}
+            className={["flex w-full h-full min-h-0", maxWidth].join(" ")}
             ref={(element) => (gridRef.current = element)}
           >
             <InfiniteLoader
