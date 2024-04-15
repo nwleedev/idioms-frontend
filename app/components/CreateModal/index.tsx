@@ -38,7 +38,7 @@ const InnerModal = (props: CreateModalProps) => {
 
   const portalRef = useRef(null as HTMLElement | null);
   const modalRef = useRef(null as HTMLElement | null);
-  const { data: image, mutateAsync, isPending } = useCreateThumbnail();
+  const { data: image, mutateAsync, isPending, reset } = useCreateThumbnail();
   const { mutateAsync: upload } = useUploadThumbnail({ type: "url", idiom });
   const [imagePrompt, setPrompt] = useState(idiom.thumbnailPrompt);
 
@@ -62,9 +62,10 @@ const InnerModal = (props: CreateModalProps) => {
   }, [onClose, isOpen, isPending]);
   const onCreate = useCallback(
     async (imagePrompt: string) => {
+      reset();
       await mutateAsync({ prompt: imagePrompt });
     },
-    [mutateAsync]
+    [mutateAsync, reset]
   );
   return createPortal(
     <div
@@ -74,12 +75,12 @@ const InnerModal = (props: CreateModalProps) => {
       }}
     >
       <article
-        className="flex flex-col max-w-[720px] w-full min-h-[240px] bg-white rounded-xl py-4 px-6 gap-y-2 m-4"
+        className="flex flex-col max-w-[720px] w-full min-h-[240px] bg-white rounded-sm py-4 px-6 gap-y-2 m-4"
         ref={(element) => {
           modalRef.current = element;
         }}
       >
-        <h2 className="text-base font-semibold text-center">New Thumbnail</h2>
+        <h2 className="text-xl font-semibold text-center">New Thumbnail</h2>
         <p className="text-sm text-center">
           Put a url of image matches the idiom.
         </p>
@@ -94,18 +95,23 @@ const InnerModal = (props: CreateModalProps) => {
           className="flex w-full h-64 bg-gray-500 bg-center rounded shadow"
           style={{
             backgroundImage:
-              image && `url('https://static.useidioms.com/${image.source}')`,
+              image &&
+              `url('https://static.useidioms.com/${
+                image.source
+              }?created_at=${image.createdAt.getTime()}')`,
           }}
         >
           {image && (
             <img
-              src={`https://static.useidioms.com/${image.source}`}
+              src={`https://static.useidioms.com/${
+                image.source
+              }?created_at=${image.createdAt.getTime()}`}
               alt=""
-              className="object-contain  backdrop-blur-sm"
+              className="object-contain backdrop-blur-sm"
             />
           )}
         </div>
-        <div className="flex justify-center mt-auto gap-x-1">
+        <div className="flex justify-center mt-auto gap-x-2">
           <Button
             onClick={() => onCreate(imagePrompt)}
             className=""
@@ -124,6 +130,7 @@ const InnerModal = (props: CreateModalProps) => {
             }}
             className="bg-orange-500"
             fontSize="sm"
+            action="success"
           >
             Upload
           </Button>

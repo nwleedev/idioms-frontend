@@ -66,25 +66,25 @@ const InnerModal = (props: UploadModalProps) => {
   );
   return createPortal(
     <div
-      className="fixed top-0 left-0 right-0 bottom-0 bg-gray-500 bg-opacity-60 flex justify-center items-center overflow-hidden"
+      className="fixed top-0 bottom-0 left-0 right-0 flex items-center justify-center overflow-hidden bg-gray-500 bg-opacity-60"
       ref={(element) => {
         portalRef.current = element;
       }}
     >
       <article
-        className="flex flex-col max-w-[720px] w-full h-[240px] bg-white rounded-xl p-4 gap-y-2 m-4"
+        className="flex flex-col max-w-[720px] w-full h-[240px] bg-white rounded-sm px-4 py-2 gap-y-2 m-4"
         ref={(element) => {
           modalRef.current = element;
         }}
       >
-        <h2 className="text-center text-base font-semibold">New Thumbnail</h2>
-        <p className="text-center text-sm">
+        <h2 className="text-base font-semibold text-center">New Thumbnail</h2>
+        <p className="text-sm text-center">
           Put a url of image matches the idiom.
         </p>
         <input
           type="url"
           id={`thumbnail:url:${idiom.idiom}`}
-          className="w-full border rounded mt-4"
+          className="w-full mt-4 border rounded"
           value={url}
           onChange={(event) => setUrl(event.target.value)}
         />

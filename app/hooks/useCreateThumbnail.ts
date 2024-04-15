@@ -15,7 +15,6 @@ const useCreateThumbnail = () => {
     if (!apiUrl) {
       return;
     }
-    debugger;
     const response = await fetch(apiUrl, {
       method: httpMethods.POST,
       body: JSON.stringify(args),
@@ -26,6 +25,7 @@ const useCreateThumbnail = () => {
     const data = await response.json();
     return {
       source: data.image as string,
+      createdAt: new Date(),
     };
   };
   const { data, mutate, mutateAsync, status, error, reset, isPending } =
