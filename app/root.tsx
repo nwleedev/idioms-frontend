@@ -1,4 +1,10 @@
-import { Links, Meta, Outlet, Scripts } from "@remix-run/react";
+import {
+  Links,
+  Meta,
+  Outlet,
+  Scripts,
+  ScrollRestoration,
+} from "@remix-run/react";
 import { Suspense, lazy } from "react";
 
 import { LinksFunction } from "@remix-run/node";
@@ -50,6 +56,7 @@ export default function Root() {
         <Suspense>
           {typeof window !== "undefined" && <LocationListener />}
         </Suspense>
+        <ScrollRestoration />
         <Scripts />
       </body>
     </html>
