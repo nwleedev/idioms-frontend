@@ -110,8 +110,9 @@ function Settings() {
               <span className="inline-flex">Save</span>
             </Button>
             <Button
-              className="flex justify-center w-full py-1 bg-black column200:w-40"
+              className="flex justify-center w-full py-1 column200:w-40"
               onClick={() => onReset()}
+              action="secondary"
             >
               <span className="inline-flex">Reset</span>
             </Button>

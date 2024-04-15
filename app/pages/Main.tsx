@@ -17,9 +17,13 @@ function Main() {
   const { maxWidth } = useGridColumns();
 
   return (
-    <div className={["px-4 w-full mx-auto h-full", maxWidth].join(" ")}>
+    <div
+      className={["px-4 w-full mx-auto h-full flex flex-col", maxWidth].join(
+        " "
+      )}
+    >
       <NavBar />
-      <main className="flex flex-col w-full h-[calc(100vh-4rem)] gap-y-2 sm:gap-y-4">
+      <main className="flex flex-col w-full h-full min-h-0 gap-y-2 sm:gap-y-4">
         <IdiomsGrid
           idioms={idioms}
           isFetched={isFetched}
