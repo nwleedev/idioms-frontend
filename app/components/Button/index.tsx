@@ -1,6 +1,7 @@
-import { HTMLAttributes, ReactNode, useMemo } from "react";
+import { ReactNode, useMemo } from "react";
 
-export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;
   children?: ReactNode;
   fontSize?: "xs" | "sm" | "base";
@@ -41,7 +42,7 @@ const Button = (props: ButtonProps) => {
       case "danger":
         return "bg-black text-white";
       case "info":
-        return "bg-sky-500 text-white";
+        return "bg-blue-500 text-white";
     }
   }, [action]);
   const defaultClassname =
