@@ -145,7 +145,7 @@ const IdiomPage = (props: IdiomPageProps) => {
                 {idiom?.examples.map((example, index) => {
                   return (
                     <Example
-                      example={{ content: example, index }}
+                      example={{ content: example, index, idiomId: idiom.id }}
                       key={`example:${example.slice(0, 20)}:${index}`}
                     />
                   );

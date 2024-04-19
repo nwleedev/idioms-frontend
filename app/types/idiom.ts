@@ -5,13 +5,15 @@ export interface Idiom {
   meaningFull: string;
   createdAt: Date;
   thumbnail?: string;
-  thumbnailPrompt: string;
+  description: string;
   examples: string[];
 }
 
 export interface IdiomExample {
   index: number;
   content: string;
+
+  idiomId: string;
 }
 
 export interface IdiomResponse {
