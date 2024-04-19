@@ -34,7 +34,7 @@ const IdiomTableHead = (props: IdiomTableHeadProps) => {
           </th>
           <th scope="col" className="px-3 py-3 text-start whitespace-nowrap">
             <span className="text-xs font-semibold tracking-wide text-gray-800 dark:text-gray-200">
-              Prompt
+              Description
             </span>
           </th>
           <th scope="col" className="px-3 py-3 text-start whitespace-nowrap">

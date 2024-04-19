@@ -40,7 +40,7 @@ const InnerModal = (props: CreateModalProps) => {
   const modalRef = useRef(null as HTMLElement | null);
   const { data: image, mutateAsync, isPending, reset } = useCreateThumbnail();
   const { mutateAsync: upload } = useUploadThumbnail({ type: "url", idiom });
-  const [imagePrompt, setPrompt] = useState(idiom.thumbnailPrompt);
+  const [imagePrompt, setPrompt] = useState(idiom.description);
 
   useEffect(() => {
     const onClickAway = function (event: MouseEvent) {
