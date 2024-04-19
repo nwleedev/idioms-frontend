@@ -4,7 +4,7 @@ export async function fetchIdioms() {
   try {
     const apiURL = import.meta.env.VITE_API_URL_PROD;
     const response = await fetch(
-      `${apiURL}/idioms?count=20&order_by=created_at`
+      `${apiURL}/idioms?count=40&order_by=created_at`
     );
     const data: IdiomResponse = await response.json();
 
