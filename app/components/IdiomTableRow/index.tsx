@@ -26,7 +26,7 @@ const IdiomTableRow = (props: IdiomTableRowProps) => {
       <tr>
         <td className="size-px min-w-[120px] whitespace-nowrap px-3 py-3">
           <div className="flex items-center gap-x-3">
-            <span className="font-semibold text-sm text-gray-800 dark:text-white">
+            <span className="text-sm font-semibold text-gray-800 dark:text-white">
               {idiom.idiom}
             </span>
           </div>
@@ -57,7 +57,7 @@ const IdiomTableRow = (props: IdiomTableRowProps) => {
                 }}
               >
                 <Square2StackIcon
-                  className="text-gray-800 dark:text-white hover:bg-gray-100 rounded"
+                  className="text-gray-800 rounded dark:text-white hover:bg-gray-100"
                   width={"20"}
                 />
               </button>
@@ -66,7 +66,7 @@ const IdiomTableRow = (props: IdiomTableRowProps) => {
         </Guard>
         <Guard when={!idiom.thumbnail}>
           <td className="size-px min-w-[300px] whitespace-nowrap px-3 py-3 text-center">
-            <span className="text-sm text-gray-800 dark:text-white mx-auto">
+            <span className="mx-auto text-sm text-gray-800 dark:text-white">
               -
             </span>
           </td>
@@ -74,15 +74,15 @@ const IdiomTableRow = (props: IdiomTableRowProps) => {
 
         <td className="size-px min-w-[200px] px-3 py-0.5">
           <span className="text-xs text-gray-800 dark:text-white">
-            {idiom.thumbnailPrompt}
+            {idiom.description}
           </span>
         </td>
-        <td className="size-px whitespace-nowrap px-3 py-3">
+        <td className="px-3 py-3 size-px whitespace-nowrap">
           <span className="text-sm text-gray-800 dark:text-white">
             {createdAt}
           </span>
         </td>
-        <td className="size-px whitespace-nowrap py-3">
+        <td className="py-3 size-px whitespace-nowrap">
           <section className="flex items-center gap-x-1">
             <label
               htmlFor={`thumbnail:file:${idiom.id}`}
