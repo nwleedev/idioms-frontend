@@ -7,20 +7,12 @@ interface GridIdiomProps {
   idiom?: Idiom;
   columnIndex: number;
   columns: number;
-  style: CSSProperties;
+  style?: CSSProperties;
 }
 
 const GridIdiom = (props: GridIdiomProps) => {
   const { idiom, columnIndex, columns, style } = props;
-  const classNames = [
-    columnIndex === 0
-      ? "pr-2 pl-1"
-      : columnIndex === columns - 1
-      ? "pl-2 pr-2"
-      : "px-2",
-    "py-2",
-    "w-full max-w-full h-full mx-auto",
-  ];
+  const classNames = ["px-2", "py-2", "w-full max-w-full h-full mx-auto"];
 
   return (
     <GuardV3 data={{ idiom }} when={!!idiom}>
@@ -31,28 +23,28 @@ const GridIdiom = (props: GridIdiomProps) => {
             to={`/${idiom.id}`}
             className="w-full h-full max-w-full mx-auto"
           >
-            <section className="flex flex-col w-full h-full px-4 pt-6 pb-4 rounded shadow cursor-pointer gap-y-2 bg-slate-50 hover:shadow-lg">
+            <section className="flex flex-col w-full h-full p-1 rounded cursor-pointer gap-y-2">
               <div
+                className="transition-all bg-center hover:scale-105"
                 style={{
                   backgroundImage: `url("https://static.useidioms.com/${idiom.thumbnail}")`,
                 }}
-                className="bg-center"
               >
                 <div className="backdrop-blur-[50px] h-full">
                   <img
                     src={`https://static.useidioms.com/${idiom.thumbnail}`}
                     alt={idiom.idiom}
-                    className="max-w-[190px] w-full object-cover mx-auto h-auto"
+                    className="object-cover max-w-[240px] w-full min-h-[240px] h-auto mx-auto rounded"
                     onLoad={() => {}}
                   />
                 </div>
               </div>
-              <div className="flex flex-col h-full">
-                <h2 className="mt-1 text-lg font-semibold leading-tight font-Work_Sans line-clamp-2">
+              <div className="flex flex-col h-24 pl-0.5 pr-2">
+                <h2 className="mt-1 text-lg font-semibold leading-tight line-clamp-2 font-Work_Sans">
                   {idiom.idiom}
                 </h2>
-                <div className="mt-auto mb-2">
-                  <p className="text-xs font-normal line-clamp-2">
+                <div className="mt-auto">
+                  <p className="text-sm font-light line-clamp-2">
                     {idiom.meaningBrief}
                   </p>
                 </div>
