@@ -1,22 +1,7 @@
-import {
-  LinksFunction,
-  LoaderFunction,
-  MetaFunction,
-  json,
-} from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
-import Home from "~/pages/Home";
-import { css as mainCss } from "~/pages/Main";
-import { Idiom } from "~/types/idiom";
+import { LinksFunction, MetaFunction } from "@remix-run/node";
+import Main, { css as mainCss } from "~/pages/Main";
 
 export const links: LinksFunction = () => [...mainCss];
-
-export const loader: LoaderFunction = async () => {
-  const response = await fetch(`http://localhost:8081/idioms/main`);
-  const data: { idioms: Idiom[] } = await response.json();
-
-  return json({ idioms: data.idioms });
-};
 
 export const meta: MetaFunction = () => {
   return [
@@ -63,7 +48,5 @@ export const meta: MetaFunction = () => {
 };
 
 export default function HomePage() {
-  const { idioms } = useLoaderData<typeof loader>();
-
-  return <Home idioms={idioms} />;
+  return <Main />;
 }

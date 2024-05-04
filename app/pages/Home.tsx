@@ -43,7 +43,7 @@ function Home(props: HomeProps) {
             Learn idioms with practical examples!
           </p>
           <div className="flex items-end">
-            <Link to={"/"} className="flex whitespace-nowrap">
+            <Link to={"/idioms"} className="flex whitespace-nowrap">
               <span className="text-sm font-semibold text-gray-600 sm:text-base">
                 View Idioms
               </span>
