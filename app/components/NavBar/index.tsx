@@ -5,14 +5,24 @@ import useGridColumns from "~/hooks/useGridColumns";
 import IdiomSearch from "../IdiomSearch";
 import Logo from "../Logo";
 
-const NavBar = () => {
+export interface NavBarProps {
+  className?: string;
+}
+
+const NavBar = (props: NavBarProps) => {
+  const { className = "" } = props;
   const [isInputClicked, setIsInputClicked] = useState(false);
   const { columns } = useGridColumns();
   const hasLabel = columns !== 1;
   const hasLogo = !isInputClicked || columns !== 1;
   const location = useLocation();
   return (
-    <div className="flex items-center justify-between px-0.5 column200:pr-2 py-4 h-16">
+    <div
+      className={[
+        "flex items-center justify-between px-0.5 column200:pr-2 py-4 h-16",
+        className,
+      ].join(" ")}
+    >
       {hasLogo && (
         <Logo className="min-w-[135px] max-w-[165px] w-full h-auto flex" />
       )}
