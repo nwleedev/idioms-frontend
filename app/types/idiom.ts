@@ -26,6 +26,7 @@ export interface IdiomResponse {
 
 export interface IdiomPage {
   idioms: Idiom[];
+  count: number;
   nextToken: string;
   previousToken: string;
 }

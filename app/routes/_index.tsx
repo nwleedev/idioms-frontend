@@ -5,11 +5,10 @@ import {
   json,
 } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-import Home from "~/pages/Home";
-import { css as mainCss } from "~/pages/Main";
+import Home, { css as homeCss } from "~/pages/Home";
 import { Idiom } from "~/types/idiom";
 
-export const links: LinksFunction = () => [...mainCss];
+export const links: LinksFunction = () => [...homeCss];
 
 export const loader: LoaderFunction = async () => {
   const response = await fetch(`http://localhost:8081/idioms/main`);

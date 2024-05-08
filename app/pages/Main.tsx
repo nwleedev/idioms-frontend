@@ -9,7 +9,6 @@ export const css = [{ rel: "stylesheet", href: style }, ...idiomsGridCss];
 function Main() {
   const { data, isFetching, isFetched, hasNextPage, fetchNextPage } = useIdioms(
     {
-      count: 20,
       hasThumbnail: true,
     }
   );

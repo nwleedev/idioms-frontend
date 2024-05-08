@@ -1,12 +1,12 @@
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
 import { Link } from "@remix-run/react";
-import { useMemo } from "react";
 import GridIdiom from "~/components/GridIdiom";
 import { css as idiomsGridCss } from "~/components/IdiomsGrid";
 import NavBar from "~/components/NavBar";
 import useGridColumns from "~/hooks/useGridColumns";
 import { Idiom } from "~/types/idiom";
-import style from "./Main.css?url";
+
+import style from "./Home.css?url";
 
 export const css = [{ rel: "stylesheet", href: style }, ...idiomsGridCss];
 
@@ -17,17 +17,6 @@ interface HomeProps {
 function Home(props: HomeProps) {
   const { idioms } = props;
   const { maxWidth, columns } = useGridColumns();
-  const gridClass = useMemo(() => {
-    switch (columns) {
-      case 1: {
-        return "grid-cols-1";
-      }
-      case 2: {
-        return "grid-cols-2";
-      }
-    }
-    return "grid-cols-3";
-  }, [columns]);
 
   return (
     <div
@@ -51,7 +40,7 @@ function Home(props: HomeProps) {
             </Link>
           </div>
         </div>
-        <article className={["grid gap-4", gridClass].join(" ")}>
+        <article className="homeGrid">
           {idioms.map((idiom, index) => {
             return (
               <GridIdiom
