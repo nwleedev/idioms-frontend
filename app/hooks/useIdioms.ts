@@ -1,26 +1,19 @@
+import { useSearchParams } from "@remix-run/react";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useEffect, useMemo } from "react";
+import queryKeys from "~/lib/query-keys";
 import { httpMethods } from "../constants/http";
 import { IdiomPage, IdiomResponse, IdiomsPageParam } from "../types/idiom";
-import useApi from "./useApi";
 
 interface UseIdiomsProps {
-  count?: number;
   hasThumbnail?: boolean;
 }
 
 const useIdioms = (props: UseIdiomsProps) => {
-  const { count = 10, hasThumbnail = false } = props;
-  const url = useApi({
-    paths: hasThumbnail ? ["idioms"] : ["idioms", "admin"],
-  });
-  const queryKey = [
-    {
-      key: "useIdioms",
-      count,
-      url,
-    },
-  ] as const;
+  const { hasThumbnail = false } = props;
+  const [params] = useSearchParams();
+  const queryKey = queryKeys.idioms(hasThumbnail, params);
+
   const {
     data,
     error,
@@ -33,13 +26,16 @@ const useIdioms = (props: UseIdiomsProps) => {
   } = useInfiniteQuery({
     queryKey,
     queryFn: async ({ pageParam, queryKey }) => {
-      const { count, url } = queryKey[0];
+      const [api, path, count, orderBy, orderDirection] = queryKey;
+      const url = [api, path].join("/");
       const params = new URLSearchParams();
       if (pageParam !== undefined) {
         const { cursor } = pageParam;
         params.append(cursor.key, cursor.token);
       }
-      params.append("count", count.toString());
+      params.append("count", count);
+      params.append("orderBy", orderBy);
+      params.append("orderDirection", orderDirection);
       const response = await fetch(url + "?" + params, {
         method: httpMethods.GET,
         headers: {
@@ -49,6 +45,7 @@ const useIdioms = (props: UseIdiomsProps) => {
       const data: IdiomResponse = await response.json();
       return {
         idioms: data.idioms,
+        count: parseInt(count),
         nextToken: data.cursor.next,
         previousToken: data.cursor.previous,
       } satisfies IdiomPage;
@@ -65,11 +62,12 @@ const useIdioms = (props: UseIdiomsProps) => {
     getPreviousPageParam: (currentData) => {
       return {
         cursor: {
-          key: "previousToken",
+          key: "prevToken",
           token: currentData.previousToken,
         },
       };
     },
+    refetchOnWindowFocus: false,
   });
 
   const hasNextPage = useMemo(() => {
@@ -77,8 +75,8 @@ const useIdioms = (props: UseIdiomsProps) => {
       return false;
     }
     const pageSize = data.pages.length - 1;
-    return data.pages[pageSize].idioms.length === count;
-  }, [count, data]);
+    return data.pages[pageSize].idioms.length === data.pages[pageSize].count;
+  }, [data]);
 
   useEffect(() => {
     if (error === undefined || error === null) {

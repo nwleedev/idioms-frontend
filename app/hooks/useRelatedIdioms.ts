@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { httpMethods } from "~/constants/http";
+import queryKeys, { invalidKey, isInvalidKey } from "~/lib/query-keys";
 import { IdiomResponse } from "~/types/idiom";
-import useApi from "./useApi";
 
 export interface UseRelatedIdiomsProps {
   idiomId?: string;
@@ -9,15 +9,7 @@ export interface UseRelatedIdiomsProps {
 
 const useRelatedIdioms = (props: UseRelatedIdiomsProps) => {
   const { idiomId } = props;
-  const url = useApi({
-    paths: idiomId ? [`idioms`, idiomId, `related`] : undefined,
-  });
-  const queryKey = [
-    {
-      key: "useRelatedIdioms",
-      url,
-    },
-  ] as const;
+  const queryKey = idiomId ? queryKeys.idiomRelated(idiomId) : invalidKey;
   const {
     data: idioms,
     refetch,
@@ -25,10 +17,10 @@ const useRelatedIdioms = (props: UseRelatedIdiomsProps) => {
   } = useQuery({
     queryKey,
     queryFn: async ({ queryKey }) => {
-      const { url } = queryKey[0];
-      if (!url) {
-        return null;
+      if (isInvalidKey(queryKey)) {
+        return;
       }
+      const url = queryKey.join("/");
       const response = await fetch(url, {
         method: httpMethods.GET,
         headers: {

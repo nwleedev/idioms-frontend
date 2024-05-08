@@ -1,3 +1,4 @@
+import { useSearchParams } from "@remix-run/react";
 import {
   InfiniteData,
   useMutation,
@@ -5,9 +6,8 @@ import {
 } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { httpMethods } from "~/constants/http";
+import queryKeys from "~/lib/query-keys";
 import { Idiom, IdiomPage, ThumbnailResponse } from "~/types/idiom";
-import useApi from "./useApi";
-import useIdioms from "./useIdioms";
 
 interface UseUploadThumbnailProps<Type extends "file" | "url"> {
   idiom: Idiom;
@@ -28,13 +28,11 @@ const useUploadThumbnail = <Type extends "file" | "url">(
   props: UseUploadThumbnailProps<Type>
 ) => {
   const { idiom, type } = props;
-  const apiUrl = useApi({
-    paths: ["idioms/thumbnail", type === "file" ? "file" : "url"],
-  });
+  const [params] = useSearchParams();
+
+  const mutationKey = queryKeys.uploadThumbnail(type);
   const mutationFn = async (args: UploadThumbnailArgs<Type>) => {
-    if (!apiUrl) {
-      return;
-    }
+    const url = mutationKey.join("/");
     const formData = new FormData();
     formData.append("idiomId", idiom.id);
     if (type === "file" && args.file) {
@@ -43,14 +41,13 @@ const useUploadThumbnail = <Type extends "file" | "url">(
       formData.append("imageUrl", btoa(args.url));
     }
 
-    const response = await fetch(apiUrl, {
+    const response = await fetch(url, {
       method: httpMethods.POST,
       body: formData,
     });
     const data: ThumbnailResponse = await response.json();
     return data;
   };
-  const { queryKey } = useIdioms({ count: 100 });
   const queryClient = useQueryClient();
 
   const { mutate, mutateAsync, status, error, reset } = useMutation({
@@ -59,14 +56,17 @@ const useUploadThumbnail = <Type extends "file" | "url">(
       data;
     },
     onSuccess(data) {
+      const idiomQueryKey = queryKeys.idioms(false, params);
       const idiomsCache =
-        queryClient.getQueryData<InfiniteData<IdiomPage, unknown>>(queryKey);
+        queryClient.getQueryData<InfiniteData<IdiomPage, unknown>>(
+          idiomQueryKey
+        );
       if (idiomsCache === undefined || data === undefined) {
         return;
       }
       const { pages, pageParams } = idiomsCache;
       const updatePages = pages.map((page) => {
-        const { idioms, nextToken, previousToken } = page;
+        const { idioms, count, nextToken, previousToken } = page;
         return {
           idioms: idioms.map((idiom) => {
             if (idiom.id === data.idiomId) {
@@ -77,6 +77,7 @@ const useUploadThumbnail = <Type extends "file" | "url">(
             }
             return idiom;
           }),
+          count,
           nextToken,
           previousToken,
         } satisfies IdiomPage;
@@ -85,7 +86,7 @@ const useUploadThumbnail = <Type extends "file" | "url">(
         pageParams: pageParams,
         pages: updatePages,
       } satisfies InfiniteData<IdiomPage, unknown>;
-      queryClient.setQueryData(queryKey, updatedCache);
+      queryClient.setQueryData(idiomQueryKey, updatedCache);
     },
   });
 

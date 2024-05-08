@@ -1,16 +1,13 @@
 import { useMutation } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { httpMethods } from "~/constants/http";
+import queryKeys from "~/lib/query-keys";
 import { IdiomInput } from "~/types/idiom";
-import useApi from "./useApi";
 
 const useCreateIdiomInputs = () => {
-  const apiUrl = useApi({ paths: ["idioms/inputs"] });
   const mutationFn = async (args: IdiomInput[]) => {
-    if (!apiUrl) {
-      return;
-    }
-    const response = await fetch(apiUrl, {
+    const url = queryKeys.createInputs().join("/");
+    const response = await fetch(url, {
       method: httpMethods.POST,
       body: JSON.stringify(args),
       headers: {

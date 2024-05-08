@@ -1,21 +1,16 @@
 import { useMutation } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { httpMethods } from "~/constants/http";
-import useApi from "./useApi";
+import queryKeys from "~/lib/query-keys";
 
 interface CreateThumbnailArgs {
   prompt: string;
 }
 
 const useCreateThumbnail = () => {
-  const apiUrl = useApi({
-    paths: ["idioms/thumbnail/draft"],
-  });
   const mutationFn = async (args: CreateThumbnailArgs) => {
-    if (!apiUrl) {
-      return;
-    }
-    const response = await fetch(apiUrl, {
+    const url = queryKeys.createThumbnail().join("/");
+    const response = await fetch(url, {
       method: httpMethods.POST,
       body: JSON.stringify(args),
       headers: {

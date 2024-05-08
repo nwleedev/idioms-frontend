@@ -1,8 +1,9 @@
+import { useSearchParams } from "@remix-run/react";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useEffect, useMemo } from "react";
 import { httpMethods } from "~/constants/http";
+import queryKeys, { invalidKey, isInvalidKey } from "~/lib/query-keys";
 import { IdiomPage, IdiomResponse, IdiomsPageParam } from "~/types/idiom";
-import useApi from "./useApi";
 
 interface UseSearchIdiomsProps {
   count?: number;
@@ -11,17 +12,11 @@ interface UseSearchIdiomsProps {
 
 const useSearchIdioms = (props: UseSearchIdiomsProps) => {
   const { keyword, count = 10 } = props;
-  const apiUrl = useApi({
-    paths: ["idioms/search"],
-  });
-  const queryKey = [
-    {
-      key: "useSearchIdioms",
-      apiUrl,
-      count,
-      keyword,
-    },
-  ] as const;
+  const [params] = useSearchParams();
+  const queryKey =
+    keyword && keyword.length > 1
+      ? queryKeys.idiomSearch(keyword, params)
+      : invalidKey;
   const {
     data,
     error,
@@ -34,18 +29,21 @@ const useSearchIdioms = (props: UseSearchIdiomsProps) => {
   } = useInfiniteQuery({
     queryKey,
     queryFn: async ({ pageParam, queryKey }) => {
-      const { apiUrl, keyword, count } = queryKey[0];
-      if (!apiUrl || !keyword) {
+      if (isInvalidKey(queryKey)) {
         return;
       }
+      const [api, path, keyword, count, orderBy, orderDirection] = queryKey;
+      const url = [api, path].join("/");
       const params = new URLSearchParams();
       if (pageParam !== undefined) {
         const { cursor } = pageParam;
         params.append(cursor.key, cursor.token);
       }
-      params.append("count", count.toString());
       params.append("keyword", keyword);
-      const response = await fetch(apiUrl + "?" + params, {
+      params.append("count", count);
+      params.append("orderBy", orderBy);
+      params.append("orderDirection", orderDirection);
+      const response = await fetch(url + "?" + params, {
         method: httpMethods.GET,
         headers: {
           "content-type": "application/json",
@@ -54,6 +52,7 @@ const useSearchIdioms = (props: UseSearchIdiomsProps) => {
       const data: IdiomResponse = await response.json();
       return {
         idioms: data.idioms,
+        count: parseInt(count),
         nextToken: data.cursor.next,
         previousToken: data.cursor.previous,
       } satisfies IdiomPage;
@@ -76,7 +75,7 @@ const useSearchIdioms = (props: UseSearchIdiomsProps) => {
       }
       return {
         cursor: {
-          key: "previousToken",
+          key: "prevToken",
           token: currentData.previousToken,
         },
       };
