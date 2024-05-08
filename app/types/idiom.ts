@@ -4,6 +4,7 @@ export interface Idiom {
   meaningBrief: string;
   meaningFull: string;
   createdAt: Date;
+  publishedAt: Date;
   thumbnail?: string;
   description: string;
   examples: string[];

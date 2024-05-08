@@ -32,7 +32,7 @@ const queryKeys = {
       "idioms",
       keyword,
       params.get("count") ?? "30",
-      params.get("orderBy") ?? "createdAt",
+      params.get("orderBy") ?? "publishedAt",
       params.get("orderDirection") ?? "desc",
     ] as const;
   },

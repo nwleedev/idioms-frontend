@@ -65,6 +65,12 @@ export default function Component() {
   const { idiom } = useLoaderData<typeof loader>();
 
   return (
-    <IdiomPage idiom={{ ...idiom, createdAt: new Date(idiom.createdAt) }} />
+    <IdiomPage
+      idiom={{
+        ...idiom,
+        createdAt: new Date(idiom.createdAt),
+        publishedAt: new Date(idiom.publishedAt),
+      }}
+    />
   );
 }

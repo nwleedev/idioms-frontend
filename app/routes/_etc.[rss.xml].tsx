@@ -19,7 +19,7 @@ export const loader: LoaderFunction = async () => {
       link: `https://useidioms.com/${idiom.id}`,
       description: idiom.meaningBrief,
       content: idiom.meaningFull,
-      date: idiom.createdAt,
+      date: idiom.publishedAt,
       image: idiom.thumbnail,
     });
   });

@@ -8,17 +8,17 @@ export async function createSitemap() {
     return `
     <url>
       <loc>https://useidioms.com/${idiom.id}</loc>
-      <lastmod>${format(idiom.createdAt, "yyyy-MM-dd")}</lastmod>
+      <lastmod>${format(idiom.publishedAt, "yyyy-MM-dd")}</lastmod>
       <changefreq>weekly</changefreq>
       <priority>0.8</priority>
    </url>
     `;
   });
-  const createdAt = format(new Date(), "yyyy-MM-dd");
+  const publishedAt = format(new Date(), "yyyy-MM-dd");
   const metadata = `
   <url>
   <loc>https://useidioms.com</loc>
-  <lastmod>${createdAt}</lastmod>
+  <lastmod>${publishedAt}</lastmod>
   <changefreq>weekly</changefreq>
   <priority>1</priority>
 </url>
