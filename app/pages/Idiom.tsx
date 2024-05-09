@@ -76,9 +76,9 @@ const IdiomPage = (props: IdiomPageProps) => {
               height={24}
             />
           </button>
-          <h1 className="text-xl font-medium font-Work_Sans tracking-tight w-[50%] truncate">
+          <h2 className="text-xl font-medium font-Work_Sans tracking-tight w-[50%] truncate">
             {idiom?.idiom}
-          </h1>
+          </h2>
         </section>
       </Guard>
       <div className="Idiom w-full max-w-[820px] mx-auto pt-[320px] pb-[320px] shadow relative">
@@ -124,7 +124,7 @@ const IdiomPage = (props: IdiomPageProps) => {
                   <div className=" backdrop-blur-[50px]">
                     <img
                       src={`https://static.useidioms.com/${idiom?.thumbnail}`}
-                      alt={`thumbnail:${idiom?.id}`}
+                      alt={`Background blur of ${idiom?.idiom}`}
                       className="max-w-[400px] w-full h-[auto] mx-auto object-contain"
                     />
                   </div>
@@ -161,7 +161,7 @@ const IdiomPage = (props: IdiomPageProps) => {
                   <div className="flex items-center gap-x-3">
                     <img
                       src={`https://static.useidioms.com/${idiom?.thumbnail}`}
-                      alt={idiom.idiom}
+                      alt={`Thumbnail of ${idiom.idiom}`}
                       className="w-[100px] h-[100px] shadow-sm"
                     />
                     <div className="flex flex-col justify-start h-full overflow-hidden">

@@ -13,7 +13,7 @@ export const meta: MetaFunction = () => {
     {
       tagName: "link",
       rel: "canonical",
-      href: "https://useidioms.com",
+      href: "https://useidioms.com/idioms",
     },
     { property: "og:title", content: "Use Idioms" },
     { property: "og:url", content: `https://useidioms.com` },

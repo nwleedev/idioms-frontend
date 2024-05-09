@@ -11,7 +11,7 @@ interface GridIdiomProps {
 }
 
 const GridIdiom = (props: GridIdiomProps) => {
-  const { idiom, columnIndex, columns, style } = props;
+  const { idiom, style } = props;
   const classNames = ["px-2", "py-2", "w-full max-w-full h-full mx-auto"];
 
   return (

@@ -30,7 +30,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
     {
       tagName: "link",
       rel: "canonical",
-      href: "https://useidioms.com",
+      href: `https://useidioms.com/${data?.idiom.id}`,
     },
     { property: "og:title", content: data?.idiom.idiom },
     { property: "og:url", content: `https://useidioms.com/${data?.idiom.id}` },

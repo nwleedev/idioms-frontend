@@ -21,7 +21,7 @@ export const meta: MetaFunction = ({ location }) => {
     {
       tagName: "link",
       rel: "canonical",
-      href: "https://useidioms.com",
+      href: "https://useidioms.com/search",
     },
     { property: "og:title", content: `Searching ${keyword} - Use Idioms` },
     {

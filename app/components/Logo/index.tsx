@@ -9,7 +9,12 @@ const Logo = (props: LogoProps) => {
   return (
     <Link to={"/"} draggable={false} className="flex">
       <section className={"flex items-center"}>
-        <img src="/logo.svg" draggable={false} className={className} />
+        <img
+          src="/logo.svg"
+          draggable={false}
+          className={className}
+          alt="Logo of useidioms.com"
+        />
       </section>
     </Link>
   );
