@@ -61,7 +61,10 @@ function handleBotRequest(
           const body = new PassThrough();
 
           responseHeaders.set("content-type", "text/html");
-          responseHeaders.set("cache-control", "public");
+          responseHeaders.set(
+            "cache-control",
+            "public, max-age=604800, must-revalidate"
+          );
 
           resolve(
             new Response(createReadableStreamFromReadable(body), {
@@ -111,7 +114,10 @@ function handleBrowserRequest(
           const body = new PassThrough();
 
           responseHeaders.set("content-type", "text/html");
-          responseHeaders.set("cache-control", "public");
+          responseHeaders.set(
+            "cache-control",
+            "public, max-age=604800, must-revalidate"
+          );
 
           resolve(
             new Response(createReadableStreamFromReadable(body), {
