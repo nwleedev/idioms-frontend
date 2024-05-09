@@ -60,7 +60,8 @@ function handleBotRequest(
         onAllReady() {
           const body = new PassThrough();
 
-          responseHeaders.set("Content-Type", "text/html");
+          responseHeaders.set("content-type", "text/html");
+          responseHeaders.set("cache-control", "public");
 
           resolve(
             new Response(createReadableStreamFromReadable(body), {
@@ -109,7 +110,8 @@ function handleBrowserRequest(
         onShellReady() {
           const body = new PassThrough();
 
-          responseHeaders.set("Content-Type", "text/html");
+          responseHeaders.set("content-type", "text/html");
+          responseHeaders.set("cache-control", "public");
 
           resolve(
             new Response(createReadableStreamFromReadable(body), {
