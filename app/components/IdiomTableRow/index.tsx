@@ -18,13 +18,16 @@ export interface IdiomTableRowProps {
 const IdiomTableRow = (props: IdiomTableRowProps) => {
   const { idiom } = props;
   const createdAt = format(idiom.createdAt, "MMM dd, yyyy HH:mm:ss");
-  const { mutateAsync, reset } = useUploadThumbnail({ idiom, type: "file" });
+  const { mutateAsync } = useUploadThumbnail({ idiom, type: "file" });
   const { onChange } = useModalContext({ key: "upload" });
   const { onChange: onCreateChange } = useModalContext({ key: "create" });
   return (
     <>
       <tr>
-        <td className="size-px min-w-[120px] whitespace-nowrap px-3 py-3">
+        <td
+          className="size-px min-w-[80px] whitespace-nowrap px-3 py-3"
+          height={55}
+        >
           <div className="flex items-center gap-x-3">
             <span className="text-sm font-semibold text-gray-800 dark:text-white">
               {idiom.idiom}
@@ -37,7 +40,7 @@ const IdiomTableRow = (props: IdiomTableRowProps) => {
           </span>
         </td>
         <Guard when={!!idiom.thumbnail}>
-          <td className="size-px min-w-[300px] whitespace-nowrap px-3 py-3">
+          <td className="size-px max-w-[300px] overflow-ellipsis whitespace-nowrap px-3 py-3">
             <div className="flex items-center gap-x-1">
               <Link
                 to={`https://static.useidioms.com/${idiom.thumbnail}`}
@@ -65,18 +68,13 @@ const IdiomTableRow = (props: IdiomTableRowProps) => {
           </td>
         </Guard>
         <Guard when={!idiom.thumbnail}>
-          <td className="size-px min-w-[300px] whitespace-nowrap px-3 py-3 text-center">
+          <td className="size-px min-w-[200px] whitespace-nowrap px-3 py-3 text-center">
             <span className="mx-auto text-sm text-gray-800 dark:text-white">
               -
             </span>
           </td>
         </Guard>
 
-        <td className="size-px min-w-[200px] px-3 py-0.5">
-          <span className="text-xs text-gray-800 dark:text-white">
-            {idiom.description}
-          </span>
-        </td>
         <td className="px-3 py-3 size-px whitespace-nowrap">
           <span className="text-sm text-gray-800 dark:text-white">
             {createdAt}
@@ -87,9 +85,7 @@ const IdiomTableRow = (props: IdiomTableRowProps) => {
             <label
               htmlFor={`thumbnail:file:${idiom.id}`}
               className="inline-flex rounded-sm text-xs gap-x-0.5 font-semibold bg-slate-600 text-white py-1.5 px-2"
-              onClick={() => {
-                reset();
-              }}
+              onClick={() => {}}
             >
               <span>File</span>
               <DocumentArrowUpIcon className="font-light" width={16} />
