@@ -10,7 +10,8 @@ export const loader: LoaderFunction = async () => {
       "content-type": "application/xml",
       "xml-version": "1.0",
       encoding: "UTF-8",
-      "cache-control": "max-age=86400, s-maxage=86400",
+      "cache-control":
+        "public, max-age=86400, s-max-age=86400, must-revalidate",
     },
   });
 };

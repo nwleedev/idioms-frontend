@@ -29,7 +29,8 @@ export const loader: LoaderFunction = async () => {
     headers: {
       "content-type": "application/xml",
       encoding: "UTF-8",
-      "cache-control": "max-age=604800, s-maxage=604800",
+      "cache-control":
+        "public, max-age=86400, s-max-age=86400, must-revalidate",
     },
   });
 };

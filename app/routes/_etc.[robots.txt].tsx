@@ -7,7 +7,8 @@ export const loader: LoaderFunction = () => {
     headers: {
       "content-type": "text/plain",
       encoding: "UTF-8",
-      "cache-control": "max-age=604800, s-maxage=604800",
+      "cache-control":
+        "public, max-age=604800, s-max-age=604800, must-revalidate",
     },
   });
 };

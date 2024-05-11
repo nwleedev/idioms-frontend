@@ -63,7 +63,7 @@ function handleBotRequest(
           responseHeaders.set("content-type", "text/html");
           responseHeaders.set(
             "cache-control",
-            "public, max-age=604800, must-revalidate"
+            "public, max-age=604800, s-max-age=604800, must-revalidate"
           );
 
           resolve(
@@ -116,7 +116,7 @@ function handleBrowserRequest(
           responseHeaders.set("content-type", "text/html");
           responseHeaders.set(
             "cache-control",
-            "public, max-age=604800, must-revalidate"
+            "public, max-age=604800, s-max-age=604800, must-revalidate"
           );
 
           resolve(
