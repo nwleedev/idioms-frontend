@@ -29,7 +29,7 @@ const queryKeys = {
   ) => {
     return [
       api(),
-      "idioms",
+      "idioms/search",
       keyword,
       params.get("count") ?? "30",
       params.get("orderBy") ?? "publishedAt",
@@ -44,6 +44,8 @@ const queryKeys = {
   uploadThumbnail: (type: "file" | "url") =>
     [api(), "idioms/thumbnail", type === "file" ? "file" : "url"] as const,
   createInputs: () => [api(), "idioms/inputs"] as const,
+  updateExamples: (id?: string) =>
+    id ? [api(), "idioms", id, "examples"] : undefined,
 };
 
 export const api = () => {
