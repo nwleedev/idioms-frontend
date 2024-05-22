@@ -105,7 +105,9 @@ const IdiomPage = (props: IdiomPageProps) => {
               </Translate>
             </div>
             <div className="flex flex-col mt-2 gap-y-1">
-              <p className="font-light">{idiom?.meaningFull}</p>
+              <p className="font-light whitespace-break-spaces">
+                {idiom?.meaningFull}
+              </p>
               <Translate
                 tag="p"
                 className="font-light text-gray-500 font-Work_Sans"
