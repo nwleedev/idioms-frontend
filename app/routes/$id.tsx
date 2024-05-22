@@ -22,7 +22,7 @@ export const links: LinksFunction = () => [...idiomPageCss];
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
   return [
-    { title: `${data?.idiom.idiom} - Use Idioms` },
+    { title: `The idiom ${data?.idiom.idiom} with examples - Use Idioms` },
     {
       name: "description",
       content: `${data?.idiom.meaningBrief} - Use Idioms`,
@@ -32,7 +32,10 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
       rel: "canonical",
       href: `https://useidioms.com/${data?.idiom.id}`,
     },
-    { property: "og:title", content: data?.idiom.idiom },
+    {
+      property: "og:title",
+      content: `The idiom ${data?.idiom.idiom} with examples - Use Idioms`,
+    },
     { property: "og:url", content: `https://useidioms.com/${data?.idiom.id}` },
     { property: "og:description", content: data?.idiom.meaningBrief },
     {
@@ -40,7 +43,10 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
       content: `https://static.useidioms.com/${data?.idiom.thumbnail}`,
     },
     { name: "twitter:card", content: "summary" },
-    { name: "twitter:title", content: `${data?.idiom.idiom} - Use Idioms` },
+    {
+      name: "twitter:title",
+      content: `The idiom ${data?.idiom.idiom} with examples - Use Idioms`,
+    },
     {
       name: "twitter:description",
       content: `${data?.idiom.meaningBrief} - Use Idioms`,
@@ -54,7 +60,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
         "@context": "https://schema.org",
         "@type": "WebSite",
         url: "https://useidioms.com",
-        name: `${data?.idiom.idiom} - Use Idioms`,
+        name: `The idiom ${data?.idiom.idiom} with examples - Use Idioms`,
         description: `${data?.idiom.meaningBrief} - Use Idioms`,
       },
     },
