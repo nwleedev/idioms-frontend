@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+import typography from "@tailwindcss/typography";
 import defaultTheme from "tailwindcss/defaultTheme";
 
 export default {
@@ -14,7 +15,10 @@ export default {
         column300: "735px",
         column400: "975px",
       },
+      colors: {
+        primary: "#ff2248",
+      },
     },
   },
-  plugins: [],
+  plugins: [typography],
 };
