@@ -1,5 +1,4 @@
 import { useSearchParams } from "@remix-run/react";
-import Footer from "~/components/Footer";
 import IdiomsGrid, { css as idiomsGridCss } from "~/components/IdiomsGrid";
 import NavBar from "~/components/NavBar";
 import useGridColumns from "~/hooks/useGridColumns";
@@ -39,7 +38,6 @@ function Search() {
           />
         </main>
       </div>
-      <Footer />
     </>
   );
 }

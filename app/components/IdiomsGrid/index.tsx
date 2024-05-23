@@ -86,7 +86,7 @@ const IdiomsGrid = (props: IdiomsGridProps) => {
     };
   }, []);
   return (
-    <GuardV3 data={{ idioms: idioms?.slice(0, 14) }} when={!!idioms}>
+    <GuardV3 data={{ idioms }} when={!!idioms}>
       {({ data: { idioms } }) => {
         return (
           <article
