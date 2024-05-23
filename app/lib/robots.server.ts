@@ -1,5 +1,7 @@
 export const robotsTxt = `User-agent: *
 Allow: /
+Disallow: /privacy-policy
+Disallow: /terms-and-conditions
 
 User-agent: GPTBot
 Disallow: /
