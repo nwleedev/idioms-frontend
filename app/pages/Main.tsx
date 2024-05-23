@@ -2,6 +2,7 @@ import IdiomsGrid, { css as idiomsGridCss } from "~/components/IdiomsGrid";
 import NavBar from "~/components/NavBar";
 import useGridColumns from "~/hooks/useGridColumns";
 import useIdioms from "~/hooks/useIdioms";
+import { cs } from "~/lib/classnames";
 import style from "./Main.css?url";
 
 export const css = [{ rel: "stylesheet", href: style }, ...idiomsGridCss];
@@ -16,13 +17,14 @@ function Main() {
   const { maxWidth } = useGridColumns();
 
   return (
-    <div
-      className={["px-4 w-full mx-auto h-full flex flex-col", maxWidth].join(
-        " "
-      )}
-    >
+    <div className="flex flex-col w-full h-full mx-auto">
       <NavBar />
-      <main className="flex flex-col w-full h-full min-h-0 gap-y-2 sm:gap-y-4">
+      <main
+        className={cs(
+          "flex flex-col w-full h-full min-h-0 gap-y-2 sm:gap-y-4 mx-auto px-4 ",
+          maxWidth
+        )}
+      >
         <IdiomsGrid
           idioms={idioms}
           isFetched={isFetched}
