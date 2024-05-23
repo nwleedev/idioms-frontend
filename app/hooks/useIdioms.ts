@@ -68,6 +68,7 @@ const useIdioms = (props: UseIdiomsProps) => {
       };
     },
     refetchOnWindowFocus: false,
+    staleTime: 10 * 1000,
   });
 
   const hasNextPage = useMemo(() => {

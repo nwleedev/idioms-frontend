@@ -30,6 +30,7 @@ const useIdiom = (props: UseIdiomProps) => {
       const data: { idiom: Idiom } = await response.json();
       return data.idiom;
     },
+    staleTime: 10 * 1000,
   });
 
   return {
