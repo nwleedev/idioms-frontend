@@ -1,5 +1,6 @@
 import { Link } from "@remix-run/react";
 import { CSSProperties, useEffect, useRef, useState } from "react";
+import { cs } from "~/lib/classnames";
 import { Idiom } from "~/types/idiom";
 import { GuardV3 } from "../Guard";
 
@@ -41,7 +42,7 @@ const GridIdiom = (props: GridIdiomProps) => {
   return (
     <GuardV3 data={{ idiom }} when={!!idiom}>
       {({ data: { idiom } }) => (
-        <div className={classNames.join(" ")} style={{ ...style }}>
+        <div className={cs(...classNames)} style={{ ...style }}>
           <Link
             key={"idiom:" + idiom.id}
             to={`/${idiom.id}`}
@@ -65,10 +66,10 @@ const GridIdiom = (props: GridIdiomProps) => {
                       <img
                         src={`https://static.useidioms.com/${idiom.thumbnail}`}
                         alt={idiom.idiom}
-                        className={[
+                        className={cs(
                           "object-cover max-w-[240px] w-full min-h-[240px] h-auto mx-auto rounded",
-                          isImageLoaded ? "visible" : "invisible",
-                        ].join(" ")}
+                          isImageLoaded ? "visible" : "invisible"
+                        )}
                         width={240}
                         height={240}
                         onLoad={function () {

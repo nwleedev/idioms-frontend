@@ -6,6 +6,7 @@ import GridIdiom from "../GridIdiom";
 import { GuardV3 } from "../Guard";
 
 import useGridColumns from "~/hooks/useGridColumns";
+import { cs } from "~/lib/classnames";
 import style from "./index.scss?url";
 
 export const css = [{ rel: "stylesheet", href: style }];
@@ -85,11 +86,11 @@ const IdiomsGrid = (props: IdiomsGridProps) => {
     };
   }, []);
   return (
-    <GuardV3 data={{ idioms }} when={!!idioms}>
+    <GuardV3 data={{ idioms: idioms?.slice(0, 14) }} when={!!idioms}>
       {({ data: { idioms } }) => {
         return (
           <article
-            className={["flex w-full h-full min-h-0", maxWidth].join(" ")}
+            className={cs("flex w-full h-full min-h-0", maxWidth)}
             ref={(element) => (gridRef.current = element)}
           >
             <InfiniteLoader
@@ -117,6 +118,9 @@ const IdiomsGrid = (props: IdiomsGridProps) => {
                         overscanStartIndex: overscanRowStartIndex * columns,
                         overscanStopIndex: overscanRowStopIndex * columns,
                       });
+                    }}
+                    onScroll={() => {
+                      console.log("OK");
                     }}
                     className="!overflow-x-hidden !overflow-y-scroll idiomsGrid"
                     ref={ref}

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { cs } from "~/lib/classnames";
 
 export interface ToggleProps {
   width?: string | number;
@@ -17,7 +18,7 @@ const Toggle = (props: ToggleProps) => {
   return (
     <div className="border px-[2px] rounded-full bg-white">
       <div
-        className="toggle w-10 h-6 flex items-center relative cursor-pointer"
+        className="relative flex items-center w-10 h-6 cursor-pointer toggle"
         onClick={() => {
           setIsInnerChecked((checked) => !checked);
           onClick();
@@ -25,7 +26,7 @@ const Toggle = (props: ToggleProps) => {
       >
         <input
           type="checkbox"
-          className="toggle invisible absolute"
+          className="absolute invisible toggle"
           checked={isFullChecked}
           onChange={(event) => {
             event.preventDefault();
@@ -34,11 +35,11 @@ const Toggle = (props: ToggleProps) => {
           }}
         />
         <span
-          className={[
+          className={cs(
             className,
             "toggleHandler rounded-full shadow-sm w-5 h-5 transition-all",
-            isFullChecked ? `bg-red-500` : "bg-gray-500",
-          ].join(" ")}
+            isFullChecked ? `bg-red-500` : "bg-gray-500"
+          )}
           style={{
             transform: isFullChecked ? "translateX(100%)" : "translateX(0%)",
           }}

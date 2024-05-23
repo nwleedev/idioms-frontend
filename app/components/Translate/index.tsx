@@ -6,6 +6,7 @@ import {
   useRef,
   useState,
 } from "react";
+import { cs } from "~/lib/classnames";
 
 type TextElement = HTMLHeadingElement & HTMLParagraphElement & HTMLSpanElement;
 
@@ -53,7 +54,7 @@ const Translate = (props: TranslateProps) => {
     {
       ...attributes,
       ref: (element) => (ref.current = element),
-      className: classNames.join(" "),
+      className: cs(...classNames),
       translate: "yes",
     },
     children

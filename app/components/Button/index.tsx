@@ -1,4 +1,5 @@
 import { ReactNode, useMemo } from "react";
+import { cs } from "~/lib/classnames";
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -47,12 +48,7 @@ const Button = (props: ButtonProps) => {
   }, [action]);
   const defaultClassname =
     "inline-flex rounded-lg gap-x-0.5 font-semibold py-1 px-3";
-  const classNames = [
-    defaultClassname,
-    fontSizeStyle,
-    background,
-    className,
-  ].join(" ");
+  const classNames = cs(defaultClassname, fontSizeStyle, background, className);
   return (
     <button className={classNames} {...others}>
       {children}
