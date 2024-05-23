@@ -26,8 +26,13 @@ const NavBar = (props: NavBarProps) => {
     if (isMenuPressed) {
       setIsInputClicked(false);
     }
-    document.body.style.overflowY = isMenuPressed ? "hidden" : "auto";
   }, [isMenuPressed]);
+
+  useEffect(() => {
+    if (columns === 1) {
+      document.body.style.overflowY = isMenuPressed ? "hidden" : "auto";
+    }
+  }, [columns, isMenuPressed]);
 
   useEffect(() => {
     const onClickOutside = function (event: MouseEvent | TouchEvent) {
