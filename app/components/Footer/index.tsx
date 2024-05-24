@@ -24,6 +24,10 @@ export default function Footer(props: FooterProps) {
             maxWidth
           )}
         >
+          <Link to={"/about"}>
+            <p>About</p>
+          </Link>
+          <p className="w-px h-full text-white bg-white" />
           <Link to={"/privacy-policy"}>
             <p>Privacy Policy</p>
           </Link>
