@@ -22,7 +22,7 @@ export const links: LinksFunction = () => [...idiomPageCss];
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
   return [
-    { title: `The idiom ${data?.idiom.idiom} with examples - Use Idioms` },
+    { title: `${data?.idiom.idiom} with examples - Use Idioms` },
     {
       name: "description",
       content: `${data?.idiom.meaningBrief} - Use Idioms`,
@@ -34,7 +34,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
     },
     {
       property: "og:title",
-      content: `The idiom ${data?.idiom.idiom} with examples - Use Idioms`,
+      content: `${data?.idiom.idiom} with examples - Use Idioms`,
     },
     { property: "og:url", content: `https://useidioms.com/${data?.idiom.id}` },
     { property: "og:description", content: data?.idiom.meaningBrief },
@@ -45,7 +45,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
     { name: "twitter:card", content: "summary" },
     {
       name: "twitter:title",
-      content: `The idiom ${data?.idiom.idiom} with examples - Use Idioms`,
+      content: `${data?.idiom.idiom} with examples - Use Idioms`,
     },
     {
       name: "twitter:description",
@@ -60,7 +60,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
         "@context": "https://schema.org",
         "@type": "WebSite",
         url: "https://useidioms.com",
-        name: `The idiom ${data?.idiom.idiom} with examples - Use Idioms`,
+        name: `${data?.idiom.idiom} with examples - Use Idioms`,
         description: `${data?.idiom.meaningBrief} - Use Idioms`,
       },
     },

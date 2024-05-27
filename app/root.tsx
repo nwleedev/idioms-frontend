@@ -25,7 +25,6 @@ export default function Root() {
           name="viewport"
           content="width=device-width, initial-scale=1.0, user-scalable=no"
         />
-        <title>Use Idioms</title>
         <link
           rel="apple-touch-icon"
           sizes="180x180"
@@ -47,6 +46,7 @@ export default function Root() {
         <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
         <Meta />
         <Links />
+        <title>Use Idioms</title>
       </head>
       <body translate="no">
         <div id="root">

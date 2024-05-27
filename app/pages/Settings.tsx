@@ -46,7 +46,7 @@ function Settings() {
 
   return (
     <>
-      <div className="w-full h-full mx-auto Settings">
+      <div className="w-full h-[calc(100%-28px)] mx-auto Settings">
         <NavBar />
         <main
           className={cs(
@@ -138,7 +138,7 @@ function Settings() {
           </section>
         </main>
       </div>
-      <Footer className="mt-[-48px]" />
+      <Footer className="" />
     </>
   );
 }
