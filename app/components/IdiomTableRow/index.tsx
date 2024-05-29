@@ -21,6 +21,7 @@ const IdiomTableRow = (props: IdiomTableRowProps) => {
   const { mutateAsync } = useUploadThumbnail({ idiom, type: "file" });
   const { onChange } = useModalContext({ key: "upload" });
   const { onChange: onCreateChange } = useModalContext({ key: "create" });
+  const { onChange: onUpdateChange } = useModalContext({ key: "idiomUpdate" });
   return (
     <>
       <tr>
@@ -34,24 +35,26 @@ const IdiomTableRow = (props: IdiomTableRowProps) => {
             </span>
           </div>
         </td>
-        <td className="size-px min-w-[240px] px-3 py-0.5">
+        <td className="size-px px-3 py-0.5">
           <span className="text-xs text-gray-800 dark:text-white">
             {idiom.meaningBrief}
           </span>
         </td>
+        <td>
+          <button
+            className="inline-flex rounded-sm text-xs gap-x-0.5 font-semibold bg-orange-500 text-white py-1.5 px-2"
+            onClick={() => {
+              console.log(idiom);
+              onUpdateChange({ isOpen: true, idiom: idiom });
+            }}
+          >
+            <span>Update</span>
+            <PaperAirplaneIcon className="font-light" width={16} />
+          </button>
+        </td>
         <Guard when={!!idiom.thumbnail}>
-          <td className="size-px max-w-[300px] overflow-ellipsis whitespace-nowrap px-3 py-3">
-            <div className="flex items-center gap-x-1">
-              <Link
-                to={`https://static.useidioms.com/${idiom.thumbnail}`}
-                target="_blank"
-                rel="noreferrer noopener"
-                className=""
-              >
-                <span className="text-sm text-gray-800 dark:text-white hover:border-b-2 hover:border-gray-700 hover:dark:border-white">
-                  {idiom.thumbnail}
-                </span>
-              </Link>
+          <td className="size-px max-w-[300px] whitespace-nowrap px-6 py-3">
+            <div className="flex items-center bg-white dark:bg-slate-900 gap-x-1">
               <button
                 onClick={() => {
                   window.navigator.clipboard.writeText(
@@ -64,6 +67,16 @@ const IdiomTableRow = (props: IdiomTableRowProps) => {
                   width={"20"}
                 />
               </button>
+              <Link
+                to={`https://static.useidioms.com/${idiom.thumbnail}`}
+                target="_blank"
+                rel="noreferrer noopener"
+                className="overflow-x-hidden bg-white dark:bg-slate-900 hover:z-10 text-ellipsis hover:overflow-x-visible hover:pr-2"
+              >
+                <span className="text-sm text-gray-800 dark:text-white hover:border-b-2 hover:border-gray-700 hover:dark:border-white">
+                  {idiom.thumbnail}
+                </span>
+              </Link>
             </div>
           </td>
         </Guard>
