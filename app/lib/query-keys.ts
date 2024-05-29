@@ -44,6 +44,8 @@ const queryKeys = {
   uploadThumbnail: (type: "file" | "url") =>
     [api(), "idioms/thumbnail", type === "file" ? "file" : "url"] as const,
   createInputs: () => [api(), "idioms/inputs"] as const,
+  createExamples: (id?: string) =>
+    id ? [api(), "idioms", id, "examples"] : undefined,
   updateExamples: (id?: string) =>
     id ? [api(), "idioms", id, "examples"] : undefined,
 };
