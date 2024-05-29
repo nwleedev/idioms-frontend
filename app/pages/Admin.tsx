@@ -16,6 +16,7 @@ import CreateModal from "~/components/CreateModal";
 import IdiomInputsModal from "~/components/IdiomInputsModal";
 import IdiomTableHead from "~/components/IdiomTableHead";
 import IdiomTableRow from "~/components/IdiomTableRow";
+import IdiomUpdateModal from "~/components/IdiomUpdateModal";
 import UploadModal from "~/components/UploadModal";
 import useIdioms from "~/hooks/useIdioms";
 import useModalContext from "~/hooks/useModalContext";
@@ -123,6 +124,7 @@ const Admin = () => {
         </div>
       </main>
       <IdiomInputsModal />
+      <IdiomUpdateModal />
       <UploadModal />
       <CreateModal />
     </div>
