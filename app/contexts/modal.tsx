@@ -9,6 +9,10 @@ export interface AppModal {
   idiomInputs: {
     isOpen: boolean;
   };
+  idiomUpdate: {
+    isOpen: boolean;
+    idiom?: Idiom;
+  };
   create: {
     isOpen: boolean;
     idiom?: Idiom;
@@ -47,6 +51,12 @@ const modalReducer = (state: AppModal, action: ModalAction) => {
       };
       break;
     }
+    case "idiomUpdate": {
+      state = {
+        ...state,
+        [key]: value as AppModal["idiomUpdate"],
+      };
+    }
   }
   return state;
 };
@@ -57,6 +67,7 @@ export const ModalsProvider = (props: PropsWithChildren) => {
     create: { isOpen: false, idiom: undefined },
     upload: { isOpen: false, idiom: undefined },
     idiomInputs: { isOpen: false },
+    idiomUpdate: { isOpen: false, idiom: undefined },
   } satisfies AppModal);
 
   return (
