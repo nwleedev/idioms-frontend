@@ -59,6 +59,10 @@ const InnerModal = (props: CreateModalProps) => {
     createHash(),
     createHash(),
     createHash(),
+    createHash(),
+    createHash(),
+    createHash(),
+    createHash(),
   ]);
 
   useEffect(() => {
@@ -81,7 +85,19 @@ const InnerModal = (props: CreateModalProps) => {
         input.value = "The painting should be much clear.";
       }
       if (index === 3) {
-        input.value = "X is male";
+        input.value = "The painting should be more detailed.";
+      }
+      if (index === 4) {
+        input.value = "The painting must not include any letters.";
+      }
+      if (index === 5) {
+        input.value = "The painting must not include any text characters.";
+      }
+      if (index === 6) {
+        input.value = "X is male.";
+      }
+      if (index === 7) {
+        input.value = "X is American.";
       }
     });
   }, [isHydrated]);
@@ -189,13 +205,15 @@ const InnerModal = (props: CreateModalProps) => {
                 image &&
                 `url('https://static.useidioms.com/${
                   image.source
-                }?created_at=${image.createdAt.getTime()}')`,
+                }?createdAt=${image.createdAt.getTime()}')`,
             }}
           >
             <div className="flex justify-center w-full h-full backdrop-blur-sm">
               {image && (
                 <img
-                  src={`https://static.useidioms.com/${image.source}`}
+                  src={`https://static.useidioms.com/${
+                    image.source
+                  }?createdAt=${image.createdAt.getTime()}`}
                   alt={`Draft created at ${image.createdAt.toLocaleString()}`}
                   className="object-contain h-full backdrop-blur-sm"
                 />
