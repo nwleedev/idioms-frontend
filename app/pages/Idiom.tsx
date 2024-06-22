@@ -25,6 +25,9 @@ const IdiomPage = (props: IdiomPageProps) => {
   const titleRef = useRef(null as HTMLDivElement | null);
   const [isIntersecting, setIsIntersecting] = useState(false);
   const { hasWordClick, onToggle } = useSpeechContext();
+  const headThumbnail =
+    idiom?.thumbnails?.find((thumbnail) => thumbnail.includes("720x720")) ??
+    idiom?.thumbnail;
   useEffect(() => {
     window.scrollTo({ top: 0 });
   }, []);
@@ -54,7 +57,7 @@ const IdiomPage = (props: IdiomPageProps) => {
       <Guard when={!!idiom}>
         <section
           style={{
-            backgroundImage: `url("https://static.useidioms.com/${idiom?.thumbnail}")`,
+            backgroundImage: `url("https://static.useidioms.com/${headThumbnail}")`,
             backgroundPosition: "top",
           }}
           className="max-w-[820px] w-full h-[100vh] object-cover fixed top-0 left-0 right-0 mx-auto"
@@ -119,13 +122,13 @@ const IdiomPage = (props: IdiomPageProps) => {
               <Guard when={!!idiom}>
                 <div
                   style={{
-                    backgroundImage: `url("https://static.useidioms.com/${idiom?.thumbnail}")`,
+                    backgroundImage: `url("https://static.useidioms.com/${headThumbnail}")`,
                   }}
                   className="bg-center"
                 >
                   <div className=" backdrop-blur-[50px]">
                     <img
-                      src={`https://static.useidioms.com/${idiom?.thumbnail}`}
+                      src={`https://static.useidioms.com/${headThumbnail}`}
                       alt={`Background blur of ${idiom?.idiom}`}
                       className="max-w-[400px] w-full h-[auto] mx-auto object-contain"
                     />

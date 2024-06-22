@@ -6,6 +6,7 @@ export interface Idiom {
   createdAt: Date;
   publishedAt: Date;
   thumbnail?: string;
+  thumbnails?: string[];
   description: string;
   examples: string[];
 }
@@ -40,8 +41,14 @@ export interface IdiomsPageParam {
 }
 
 export interface IdiomInput {
+  id: string;
   idiom: string;
   meaning: string;
+  createdAt: Date;
+}
+
+export interface IdiomInputResponse {
+  inputs: IdiomInput[];
 }
 
 export interface ThumbnailResponse {

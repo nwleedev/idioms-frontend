@@ -1,5 +1,6 @@
 import { Link } from "@remix-run/react";
-import { CSSProperties, useEffect, useRef, useState } from "react";
+import { isNil } from "ramda";
+import { CSSProperties, useEffect, useMemo, useRef, useState } from "react";
 import { cs } from "~/lib/classnames";
 import { Idiom } from "~/types/idiom";
 import { GuardV3 } from "../Guard";
@@ -17,6 +18,20 @@ const GridIdiom = (props: GridIdiomProps) => {
   const cardImageRef = useRef(null as HTMLDivElement | null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [isImageLoaded, setIsImageLoaded] = useState(false);
+  const thumbnail = useMemo(() => {
+    if (isNil(idiom) || isNil(idiom.thumbnails)) {
+      return idiom?.thumbnail;
+    }
+    for (const thumbnail of idiom.thumbnails) {
+      if (thumbnail.includes("400x400")) {
+        return thumbnail;
+      }
+      if (thumbnail.includes("720x720")) {
+        return thumbnail;
+      }
+    }
+    return idiom.thumbnail;
+  }, [idiom]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -52,7 +67,7 @@ const GridIdiom = (props: GridIdiomProps) => {
               <div
                 className="transition-all bg-center hover:scale-105 min-h-[240px] h-auto"
                 style={{
-                  backgroundImage: `url("https://static.useidioms.com/${idiom.thumbnail}")`,
+                  backgroundImage: `url("https://static.useidioms.com/${thumbnail}")`,
                 }}
               >
                 <div
@@ -64,7 +79,7 @@ const GridIdiom = (props: GridIdiomProps) => {
                   <GuardV3 when={isLoaded}>
                     {() => (
                       <img
-                        src={`https://static.useidioms.com/${idiom.thumbnail}`}
+                        src={`https://static.useidioms.com/${thumbnail}`}
                         alt={idiom.idiom}
                         className={cs(
                           "object-cover max-w-[240px] w-full min-h-[240px] h-auto mx-auto rounded",
