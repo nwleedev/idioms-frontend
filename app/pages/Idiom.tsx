@@ -58,7 +58,8 @@ const IdiomPage = (props: IdiomPageProps) => {
         <section
           style={{
             backgroundImage: `url("https://static.useidioms.com/${headThumbnail}")`,
-            backgroundPosition: "top",
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "cover",
           }}
           className="max-w-[820px] w-full h-[100vh] object-cover fixed top-0 left-0 right-0 mx-auto"
         />
@@ -123,6 +124,8 @@ const IdiomPage = (props: IdiomPageProps) => {
                 <div
                   style={{
                     backgroundImage: `url("https://static.useidioms.com/${headThumbnail}")`,
+                    backgroundRepeat: "no-repeat",
+                    backgroundSize: "cover",
                   }}
                   className="bg-center"
                 >

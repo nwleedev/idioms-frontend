@@ -68,6 +68,8 @@ const GridIdiom = (props: GridIdiomProps) => {
                 className="transition-all bg-center hover:scale-105 min-h-[240px] h-auto"
                 style={{
                   backgroundImage: `url("https://static.useidioms.com/${thumbnail}")`,
+                  backgroundRepeat: "no-repeat",
+                  backgroundSize: "cover",
                 }}
               >
                 <div
